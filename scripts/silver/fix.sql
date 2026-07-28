@@ -183,6 +183,39 @@ from bronze.erp_cust_az12
 
 
 
+-- fix erp_loc_a101
+
+INSERT into silver.erp_loc_a101(
+cid,
+cntry)
+SELECT 
+REPLACE(cid,'-','') as cid,
+CASE
+ when trim(cntry) = 'DE' then 'Germany'
+ when trim(cntry) in ('US','USA') THEN 'United State'
+ when trim(cntry) = '' or cntry is NULL THEN 'n/a'
+ else trim(cntry)
+end as cntry
+from bronze.erp_loc_a101;
+
+
+
+
+
+
+
+SELECT * FROM silver.erp_px_cat_g1v2;
+INSERT INTO silver.erp_px_cat_g1v2(
+id,
+cat,
+subcat,
+maintenance)
+SELECT
+id,
+cat,
+subcat,
+maintenance
+from bronze.erp_px_cat_g1v2;
 
 
 
