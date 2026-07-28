@@ -126,3 +126,23 @@ where sls_quantity is null or sls_quantity !=  sls_sales / sls_price  ;
 
 
 
+
+-- tests for erp_cust_az12
+
+
+
+-- Lets get the diff types of values in gender
+select distinct gen
+from bronze.erp_cust_az12;
+
+
+-- getting invalud bdates
+SELECT DISTINCT
+bdate
+from bronze.erp_cust_az12
+where bdate < '1926-01-01' or bdate > getdate()
+
+
+
+
+
